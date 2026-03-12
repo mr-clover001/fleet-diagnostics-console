@@ -114,11 +114,11 @@ in quick succession (e.g. page change + filter change together).
 
 ```
 DashboardComponent       layout shell — sticky toolbar, filters, tabs
-  - FilterPanelComponent reactive form, auto-dispatches on change
-  - EventsTableComponent paginated table, color-coded by severity
-     ─ SeverityBadgeComponent
-  - AggregationsComponent charts, summary cards, critical vehicle list
-     - LoadingSpinnerComponent
+├── FilterPanelComponent reactive form, auto-dispatches on change
+├── EventsTableComponent paginated table, color-coded by severity
+│   └── SeverityBadgeComponent
+└── AggregationsComponent charts, summary cards, critical vehicle list
+    └── LoadingSpinnerComponent
 ```
 
 ### Two views
