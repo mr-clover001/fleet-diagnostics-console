@@ -29,11 +29,11 @@ cd fleet-backend
 # Install dependencies
 npm install
 
-# Seed database with sample data (100 events)
-npm run seed
-
 # Optional Command:- if seed_log.txt in seed Folder is not present then run Command it will generate the log
 node src/seed/generateLogs.js
+
+# Seed database with sample data (100 events)
+npm run seed
 
 # Start dev server
 npm run dev
