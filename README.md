@@ -26,6 +26,7 @@ npm install -g @angular/cli
 ```bash
 cd fleet-backend
 
+#Note: No Need to add .env file in backend , i have already added and push and i didn't mention to ignore that in Git Ignore file 
 # Install dependencies
 npm install
 
