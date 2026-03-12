@@ -1,0 +1,79 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <app-error-banner [message]="vm.error" />
+
+  <div class="table-wrap">
+    <div class="table-container">
+      <app-loading-spinner *ngIf="vm.loading" />
+
+      <table
+        mat-table
+        [dataSource]="vm.events"
+        [trackBy]="trackById"
+        *ngIf="!vm.loading"
+      >
+        <!-- Timestamp -->
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+          <td mat-cell *matCellDef="let e">
+            {{ e.timestamp | date: "yyyy-MM-dd HH:mm:ss" }}
+          </td>
+        </ng-container>
+
+        <!-- Vehicle ID -->
+        <ng-container matColumnDef="vehicleId">
+          <th mat-header-cell *matHeaderCellDef>Vehicle</th>
+          <td mat-cell *matCellDef="let e">
+            <strong>#{{ e.vehicleId }}</strong>
+          </td>
+        </ng-container>
+
+        <!-- Level -->
+        <ng-container matColumnDef="level">
+          <th mat-header-cell *matHeaderCellDef>Severity</th>
+          <td mat-cell *matCellDef="let e">
+            <app-severity-badge [level]="e.level" />
+          </td>
+        </ng-container>
+
+        <!-- Code -->
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Code</th>
+          <td mat-cell *matCellDef="let e">
+            <code>{{ e.code }}</code>
+          </td>
+        </ng-container>
+
+        <!-- Message -->
+        <ng-container matColumnDef="message">
+          <th mat-header-cell *matHeaderCellDef>Message</th>
+          <td mat-cell *matCellDef="let e">{{ e.message }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: columns"
+          [class.error-row]="row.level === 'ERROR'"
+          [class.warn-row]="row.level === 'WARN'"
+        ></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell no-data" [attr.colspan]="columns.length">
+            No events found for the current filters
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <mat-paginator
+      class="paginator"
+      [length]="vm.total"
+      [pageSize]="vm.filters.limit ?? 20"
+      [pageSizeOptions]="[10, 20, 50]"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</ng-container>

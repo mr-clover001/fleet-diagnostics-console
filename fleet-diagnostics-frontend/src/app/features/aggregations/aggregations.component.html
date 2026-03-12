@@ -1,0 +1,91 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <app-loading-spinner *ngIf="vm.loading" />
+
+  <ng-container *ngIf="!vm.loading">
+    <!-- Summary Cards -->
+    <div class="cards-row">
+      <mat-card class="stat-card">
+        <mat-icon color="primary">directions_car</mat-icon>
+        <div class="stat-value">{{ vm.byVehicle.length }}</div>
+        <div class="stat-label">Total Vehicles</div>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <mat-icon>event_note</mat-icon>
+        <div class="stat-value">{{ vm.totalEvents }}</div>
+        <div class="stat-label">Total Events</div>
+      </mat-card>
+
+      <mat-card class="stat-card error">
+        <mat-icon color="warn">error</mat-icon>
+        <div class="stat-value">{{ vm.totalErrors }}</div>
+        <div class="stat-label">Total Errors</div>
+      </mat-card>
+
+      <mat-card class="stat-card critical">
+        <mat-icon>warning</mat-icon>
+        <div class="stat-value">{{ vm.criticalVehicles.length }}</div>
+        <div class="stat-label">Critical Vehicles</div>
+      </mat-card>
+    </div>
+
+    <!-- Critical Vehicles Alert -->
+    <div class="critical-section" *ngIf="vm.criticalVehicles.length > 0">
+      <h3><mat-icon>warning</mat-icon> Critical Vehicles</h3>
+      <div class="critical-cards">
+        <mat-card *ngFor="let v of vm.criticalVehicles" class="critical-card">
+          <strong>#{{ v.vehicleId }}</strong>
+          <span>{{ v.errorCount }} errors in last 1hr</span>
+          <mat-chip-set>
+            <mat-chip *ngFor="let code of v.recentErrorCodes">{{
+              code
+            }}</mat-chip>
+          </mat-chip-set>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Bar Chart -->
+    <mat-card class="chart-card" *ngIf="isBrowser">
+      <canvas
+        baseChart
+        [data]="vm.barChartData"
+        [options]="barChartOptions"
+        type="bar"
+      >
+      </canvas>
+    </mat-card>
+
+    <!-- Per Vehicle Table -->
+    <mat-card class="vehicle-table">
+      <h3>Per Vehicle Summary</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Vehicle</th>
+            <th>Total</th>
+            <th>Errors</th>
+            <th>Warnings</th>
+            <th>Info</th>
+            <th>Last Seen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let v of vm.byVehicle"
+            [class.critical-row]="v.errorCount >= 3"
+          >
+            <td>
+              <strong>#{{ v.vehicleId }}</strong>
+            </td>
+            <td>{{ v.totalEvents }}</td>
+            <td class="error-cell">{{ v.errorCount }}</td>
+            <td class="warn-cell">{{ v.warnCount }}</td>
+            <td>{{ v.infoCount }}</td>
+            <td>{{ v.lastSeen | date: "short" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+  </ng-container>
+</ng-container>

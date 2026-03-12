@@ -1,0 +1,32 @@
+<mat-toolbar color="primary" class="toolbar">
+  <mat-icon>local_shipping</mat-icon>
+  <span>Fleet Diagnostics Console</span>
+  <span class="spacer"></span>
+  <span class="version">v1.0.0</span>
+</mat-toolbar>
+
+<div class="filter-wrap">
+  <app-filter-panel />
+</div>
+
+<mat-tab-group class="tabs" animationDuration="200ms">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>list</mat-icon>&nbsp; Events
+    </ng-template>
+
+    <div class="tab-content">
+      <app-events-table />
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>bar_chart</mat-icon>&nbsp; Analytics
+    </ng-template>
+
+    <div class="tab-content">
+      <app-aggregations />
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,37 @@
+<form [formGroup]="form" class="filter-panel">
+  <mat-form-field appearance="outline">
+    <mat-label>Vehicle ID</mat-label>
+    <input matInput formControlName="vehicleId" placeholder="e.g. 1234" />
+    <mat-icon matSuffix>directions_car</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Error Code</mat-label>
+    <input matInput formControlName="code" placeholder="e.g. U0420" />
+    <mat-icon matSuffix>qr_code</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Severity</mat-label>
+    <mat-select formControlName="level">
+      <mat-option value="">All</mat-option>
+      <mat-option value="ERROR">ERROR</mat-option>
+      <mat-option value="WARN">WARN</mat-option>
+      <mat-option value="INFO">INFO</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>From</mat-label>
+    <input matInput formControlName="from" type="datetime-local" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>To</mat-label>
+    <input matInput formControlName="to" type="datetime-local" />
+  </mat-form-field>
+
+  <button mat-stroked-button color="warn" type="button" (click)="reset()">
+    <mat-icon>refresh</mat-icon> Reset
+  </button>
+</form>

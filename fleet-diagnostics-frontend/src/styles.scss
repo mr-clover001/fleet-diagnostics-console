@@ -1,0 +1,39 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; 
+  font-family: 'Roboto', sans-serif;
+  background: #f4f6f8;
+  color: #333;
+}
+
+code {
+  font-family: monospace;
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.critical-row {
+  background: #fff0f0 !important;
+}
+
+.error-cell {
+  color: #c0392b;
+  font-weight: 700;
+}
+
+.warn-cell {
+  color: #d68910;
+  font-weight: 700;
+}
