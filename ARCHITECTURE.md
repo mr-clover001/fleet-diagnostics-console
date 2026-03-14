@@ -4,7 +4,7 @@
 
 **Stack:** Node.js, Express, TypeScript, SQLite (better-sqlite3), Zod, Swagger
 
-I went with Express over NestJS to keep things simple and explicit for this scope.
+I went with Express over NestJS ( Better for **large-scale or enterprise systems** )  to keep things simple and explicit for this scope.
 SQLite made sense here — no infrastructure to set up, file-based, and fully
 queryable with SQL. In production I'd swap it for PostgreSQL.
 
