@@ -92,6 +92,7 @@ Frontend runs on: `http://localhost:4200`
 
 ### Backend
 
+- [ ] Enhance the Folder Structure According to Scable and Entreprise Level ( Modular Folder Structure) 
 - [ ] Replace SQLite with PostgreSQL + TimescaleDB for time-series at scale
 - [ ] Add WebSocket / SSE for true real-time event streaming
 - [ ] Add Redis caching for aggregation endpoints ( Because for Enterprise Level Project)
