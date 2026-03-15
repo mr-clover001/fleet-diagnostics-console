@@ -4,23 +4,66 @@
 
 **Stack:** Node.js, Express, TypeScript, SQLite (better-sqlite3), Zod, Swagger
 
-I went with Express over NestJS to keep things simple and explicit for this scope.
+I went with Express over NestJS ( Better for **large-scale or enterprise systems** ) to keep things simple and explicit for this scope.
 SQLite made sense here — no infrastructure to set up, file-based, and fully
 queryable with SQL. In production I'd swap it for PostgreSQL.
 
-### Structure
+## This project uses a simple **layered architecture** suited for its single-domain scope:
 
 ```
 Request → Router → Controller → Service → Repository → SQLite
 ```
 
-I kept strict layer separation so each file has one job:
+Each layer has a single responsibility:
 
-- **Router** — just maps routes to controllers, nothing else
-- **Controller** — reads the request, calls the service, sends the response
-- **Service** — business logic lives here (e.g. what makes a vehicle "critical")
-- **Repository** — all SQL in one place, maps snake_case DB rows to camelCase TS
-- **Parser** — regex-based log line parser, completely isolated and testable
+| Layer          | Responsibility                         |
+| -------------- | -------------------------------------- |
+| **Router**     | Define and expose API endpoints        |
+| **Controller** | Handle HTTP request/response cycle     |
+| **Service**    | Business logic and data transformation |
+| **Repository** | Database queries and data access       |
+| **SQLite**     | Persistent data storage                |
+
+### Why This Approach?
+
+For a **focused, single-domain application** like this, a flat layered structure is clean, readable, and easy to navigate. There's no overhead of feature folders or barrel files.
+
+### Scaling to Enterprise
+
+For **large-scale or enterprise systems** with multiple domains, a **module-based architecture** is preferred — where each domain is fully self-contained:
+
+```
+Example:
+
+src/
+├── modules/
+│   ├── vehicles/
+│   │   ├── vehicles.router.ts
+│   │   ├── vehicles.controller.ts
+│   │   ├── vehicles.service.ts
+│   │   └── vehicles.repository.ts
+│   ├── alerts/
+│   │   ├── alerts.router.ts
+│   │   ├── alerts.controller.ts
+│   │   ├── alerts.service.ts
+│   │   └── alerts.repository.ts
+│   ├── users/
+│   └── logs/
+├── shared/
+│   ├── db/
+│   ├── middleware/
+│   └── utils/
+└── app.ts
+```
+
+**Benefits of module-based architecture at scale:**
+
+- **Encapsulation** — each domain owns its full stack
+- **Testability** — modules can be tested in isolation
+- **Team scalability** — teams own individual modules independently
+- **Reusability** — shared utilities live in a common layer
+
+I kept strict layer separation so each file has one job:
 
 ### Database
 
