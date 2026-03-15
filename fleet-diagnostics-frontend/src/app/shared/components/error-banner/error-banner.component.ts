@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
+// Instead of creating seperate Html and CSS files, we can use inline template and styles for this simple component. This keeps the component self-contained and easier to manage.
 @Component({
   selector: 'app-error-banner',
   standalone: true,

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventLevel } from '../../../core/models/event.model';
 
+// Instead of creating seperate Html and CSS files, we can use inline template and styles for this simple component. This keeps the component self-contained and easier to manage.
 @Component({
   selector: 'app-severity-badge',
   standalone: true,
@@ -39,7 +40,7 @@ import { EventLevel } from '../../../core/models/event.model';
 export class SeverityBadgeComponent {
   @Input() level!: EventLevel;
 
-  // ✅ Computed getter — always returns a safe string
+  // Computed getter — always returns a safe string
   get badgeClass(): string {
     return this.level ? this.level.toLowerCase() : '';
   }
