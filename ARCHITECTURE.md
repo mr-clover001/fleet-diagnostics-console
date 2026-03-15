@@ -8,7 +8,7 @@ I went with Express over NestJS ( Better for **large-scale or enterprise systems
 SQLite made sense here — no infrastructure to set up, file-based, and fully
 queryable with SQL. In production I'd swap it for PostgreSQL.
 
-## This project uses a simple **layered architecture** suited for its single-domain scope:
+## This project uses a simple **layered architecture** suited for its single-domain scope, But for **large-scale or enterprise systems** with multiple domains, a **module-based architecture** is preferred — where each domain is fully self-contained.
 
 ```
 Request → Router → Controller → Service → Repository → SQLite
